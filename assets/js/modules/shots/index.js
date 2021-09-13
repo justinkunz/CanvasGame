@@ -3,7 +3,7 @@ import { CanvasComponent } from '../canvas/index.js';
 import { targets, platform, drawFireworks } from '../draw/index.js';
 import { isIntersecting } from '../hit-detection/index.js';
 
-const shotAnimation = (x, y, width, height) => {
+const shotAnimation = (shot, x, y, width, height) => {
   if (shot.isOutsideYRange) {
     game.shotsOnScreen--;
     shot.clear();
@@ -36,5 +36,5 @@ export const fireShot = () => {
   if (game.isOverShotLimit) return;
   const shot = new CanvasComponent(2, 15, platform.middle, 275, game.color);
   game.shotsOnScreen++;
-  shot.setAnimation(shotAnimation, 1);
+  shot.setAnimation((...props) => shotAnimation(shot, ...props), 1);
 };
